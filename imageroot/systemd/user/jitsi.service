@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman jitsi.service
-Requires=jitsi-app.service
-Before=jitsi-app.service
+Requires=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.service 
+Before=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.service 
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n

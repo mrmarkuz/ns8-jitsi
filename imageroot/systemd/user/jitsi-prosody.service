@@ -1,0 +1,38 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  jitsi-prosody.service
+BindsTo=jitsi.service
+After=jitsi.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+#ExecStartPre=/bin/mkdir -p tmp
+ExecStartPre=/bin/rm -f %t/jitsi-prosody.pid %t/jitsi-prosody.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-prosody.pid \
+    --cidfile %t/jitsi-prosody.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-prosody \
+    --volume jitsi-prosody:/var/www/html/:Z \
+#    --volume ./tmp:/tmp:Z \
+    --volume jitsi-prosody-config:/config:Z \
+    --volume jitsi-prosody-plugins-custom:/prosody-plugins-custom:Z \
+    --env ENV_VAR=test \
+    ${PROSODY_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-prosody.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP jitsi-prosody
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/jitsi-prosody.ctr-id
+PIDFile=%t/jitsi-prosody.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
