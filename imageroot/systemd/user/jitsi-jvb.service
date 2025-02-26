@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2022 Nethesis S.r.l.
+# Copyright (C) 2025 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
@@ -21,10 +21,10 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-jvb.pid \
     --cidfile %t/jitsi-jvb.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-jvb \
+    --env-file jitsi.env \
 #    --volume ./tmp:/tmp:Z \
     --volume jitsi-jvb-config:/config:Z \
-    --env ENV_VAR=test \
-    ${JICOFO_IMAGE}
+    ${JVB_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-jvb.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP jitsi-jvb
 SyslogIdentifier=%u

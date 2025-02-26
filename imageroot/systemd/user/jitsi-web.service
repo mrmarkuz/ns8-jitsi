@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2022 Nethesis S.r.l.
+# Copyright (C) 2025 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
@@ -22,11 +22,11 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-web.pid \
     --cidfile %t/jitsi-web.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-web \
 #    --volume ./tmp:/tmp:Z \
+    --env-file jitsi.env \
     --volume jitsi-web-config:/config:Z \
     --volume jitsi-web-crontabs:/var/spool/cron/crontabs:Z \
     --volume jitsi-web-transcripts:/usr/share/jitsi-meet/transcripts:Z \
     --volume jitsi-web-load-test:/usr/share/jitsi-meet/load-test:Z \
-    --env ENV_VAR=test \
     ${WEB_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-web.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP jitsi-web
