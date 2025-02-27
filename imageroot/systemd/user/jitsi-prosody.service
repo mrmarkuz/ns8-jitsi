@@ -21,6 +21,8 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-prosody.pid \
     --cidfile %t/jitsi-prosody.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-prosody \
+    --network=meet.jitsi \
+    --network-alias=xmpp.meet.jitsi \
     --env-file jitsi.env \
 #    --volume ./tmp:/tmp:Z \
     --volume jitsi-prosody-config:/config:Z \

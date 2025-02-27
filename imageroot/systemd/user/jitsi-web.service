@@ -21,6 +21,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-web.pid \
     --cidfile %t/jitsi-web.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-web \
+#    --network=meet.jitsi \
 #    --volume ./tmp:/tmp:Z \
     --env-file jitsi.env \
     --volume jitsi-web-config:/config:Z \
