@@ -36,7 +36,7 @@ buildah add "${container}" imageroot /imageroot
 buildah add "${container}" ui/dist /ui
 
 buildah config --entrypoint=/ \
-    --label="org.nethserver.authorizations=node:fwadm traefik@node:routeadm" \
+    --label="org.nethserver.authorizations=node:fwadm traefik@node:routeadm cluster:accountconsumer" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
     --label="org.nethserver.images=docker.io/jitsi/web:stable-10008 docker.io/jitsi/prosody:stable-10008 docker.io/jitsi/jicofo:stable-10008 docker.io/jitsi/jvb:stable-10008" \

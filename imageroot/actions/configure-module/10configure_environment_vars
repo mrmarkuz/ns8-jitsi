@@ -27,8 +27,11 @@ config = {
   "ETHERPAD_DEFAULT_PAD_TEXT": "Welcome to Web Chat!\\n\\n",
   "ETHERPAD_SKIN_NAME": "colibris",
   "ETHERPAD_SKIN_VARIANTS": "super-light-toolbar super-light-editor light-background full-width-editor",
-  "ENABLE_AUTH": "0",
+  "ENABLE_AUTH": "1",
   "ENABLE_GUESTS": "1",
+  "AUTH_TYPE": "ldap",
+  "ENABLE_AUTO_LOGIN": "1",
+  "JICOFO_SESSION_LIFETIME": "3 hours",
   "XMPP_DOMAIN": "meet.jitsi",
   "XMPP_SERVER": "xmpp.meet.jitsi",
   "XMPP_BOSH_URL_BASE": "http://xmpp.meet.jitsi:5280",
@@ -66,3 +69,50 @@ config = {
 # "NEXTCLOUD_DOMAIN": data.get('domain', ''),
 }
 agent.write_envfile('jitsi.env', config)
+
+# Get LDAP domain
+ldap_domain = data.get("ldap_domain", "ad.ns8test.com")
+
+# Set LDAP domain
+
+agent.set_env("LDAP_DOMAIN",ldap_domain)
+
+# unset LDAP
+
+agent.unset_env("LDAP_URL")
+agent.unset_env("LDAP_BASE")
+agent.unset_env("LDAP_BINDDN")
+agent.unset_env("LDAP_BINDPW")
+agent.unset_env("LDAP_FILTER")
+agent.unset_env("LDAP_AUTH_METHOD")
+agent.unset_env("LDAP_VERSION")
+agent.unset_env("LDAP_USE_TLS")
+agent.unset_env("LDAP_TLS_CHECK_PEER")
+agent.unset_env("LDAP_START_TLS")
+
+# Check if an LDAP domain is set:
+
+if ldap_domain:
+    agent.bind_user_domains([ldap_domain])
+
+    # Get LDAP properties
+    odom = Ldapproxy().get_domain(ldap_domain)
+#    base_dn = odom['base_dn']
+
+    agent.set_env("LDAP_URL","ldaps://10.0.2.2:"+odom['port'])
+    agent.set_env("LDAP_BASE",odom['base_dn'])
+    agent.set_env("LDAP_BINDDN",odom['bind_dn'])
+    agent.set_env("LDAP_BINDPW",odom['bind_password'])
+    agent.set_env("LDAP_AUTH_METHOD","bind")
+
+    if odom['schema'] == "rfc2307":
+        # OpenLDAP specific:
+        agent.set_env("LDAP_FILTER","(uid=%u)")
+
+    if odom['schema'] == "ad":
+        # Samba AD specific:
+        agent.set_env("LDAP_FILTER","(samaccountname=%u)")
+else:
+    agent.bind_user_domains([])
+
+agent.dump_env()
