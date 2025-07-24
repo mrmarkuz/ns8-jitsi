@@ -21,7 +21,7 @@ Browse to `https://<FQDN>`
 
 ## Firewall
 
-Jitsi needs port 10000/UDP.
+Jitsi needs port 9999/UDP.
 If there's a firewall in front of Jitsi, it's required to open that port on the firewall and forward it to the NS8 node that hosts Jitsi.
 
 ## Create internal user
