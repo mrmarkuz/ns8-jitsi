@@ -9,7 +9,7 @@ import agent
 import os
 
 agent.add_public_service(os.environ['MODULE_ID'], [
-    "10000/udp", # RTP over UDP
+    "9999/udp", # RTP over UDP
 ])
 
 # Ignore exit code
