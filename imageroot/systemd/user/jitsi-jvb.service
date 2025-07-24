@@ -15,15 +15,12 @@ EnvironmentFile=-%S/state/smarthost.env
 WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
-#ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/jitsi-jvb.pid %t/jitsi-jvb.ctr-id
 ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-jvb.pid \
     --cidfile %t/jitsi-jvb.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-jvb \
-    --network=meet.jitsi \
     --env-file jitsi.env \
-#    --volume ./tmp:/tmp:Z \
     --volume jitsi-jvb-config:/config:Z \
     ${JVB_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-jvb.ctr-id -t 10

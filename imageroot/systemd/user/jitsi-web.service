@@ -15,14 +15,11 @@ EnvironmentFile=-%S/state/smarthost.env
 WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
-#ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/jitsi-web.pid %t/jitsi-web.ctr-id
 ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-web.pid \
     --cidfile %t/jitsi-web.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-web \
-#    --network=meet.jitsi \
-#    --volume ./tmp:/tmp:Z \
     --env-file jitsi.env \
     --volume jitsi-web-config:/config:Z \
     --volume jitsi-web-crontabs:/var/spool/cron/crontabs:Z \

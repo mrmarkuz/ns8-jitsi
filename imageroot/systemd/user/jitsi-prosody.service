@@ -15,16 +15,13 @@ EnvironmentFile=-%S/state/smarthost.env
 WorkingDirectory=%S/state
 Restart=always
 TimeoutStopSec=70
-#ExecStartPre=/bin/mkdir -p tmp
 ExecStartPre=/bin/rm -f %t/jitsi-prosody.pid %t/jitsi-prosody.ctr-id
 ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-prosody.pid \
     --cidfile %t/jitsi-prosody.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-prosody \
-    --network=meet.jitsi \
-    --network-alias=xmpp.meet.jitsi \
+    --env-file %S/state/environment \
     --env-file jitsi.env \
-#    --volume ./tmp:/tmp:Z \
     --volume jitsi-prosody-config:/config:Z \
     --volume jitsi-prosody-plugins-custom:/prosody-plugins-custom:Z \
     ${PROSODY_IMAGE}
