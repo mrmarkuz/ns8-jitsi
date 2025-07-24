@@ -31,6 +31,7 @@
     "jitsi_fqdn": "jitsi hostname (FQDN)",
     "lets_encrypt": "Request LE Certificate",
     "http_to_https": "Force HTTPS",
+    "ldap_domain": "LDAP/AD Domain",
     "enabled": "Enabled",
     "disabled": "Disabled",
     "advanced": "Advanced",
