@@ -38,7 +38,9 @@
     "instance_configuration": "Configure jitsi",
     "domain_already_used_in_traefik": "Domain already used in traefik",
     "host_pattern": "Must be a valid fully qualified domain name",
-    "host_format": "Must be a valid fully qualified domain name"
+    "host_format": "Must be a valid fully qualified domain name",
+    "choose_the_ldap_domain_to_use": "Choose the optional LDAP domain to use for Jitsi",
+    "choose_ldap_domain": "Choose LDAP/AD Domain or leave empty"
   },
   "about": {
     "title": "About"
