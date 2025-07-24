@@ -24,7 +24,7 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/jitsi.pid \
     --name jitsi \
     --network=slirp4netns:allow_host_loopback=true \
     --publish 127.0.0.1:${TCP_PORT}:80 \
-    --publish 10000:10000/udp \
+    --publish 9999:9999/udp \
     --add-host xmpp.meet.jitsi:127.0.0.1 \
     --add-host jvb.meet.jitsi:127.0.0.1 \
     --add-host meet.jitsi:127.0.0.1 \
