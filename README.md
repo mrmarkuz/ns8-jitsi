@@ -36,7 +36,7 @@ For more information about internal auth, see [Jitsi Docker installation documen
 
 To customize Jitsi, custom files need to be created out of the default config: (in this example the Jitsi app instance is jitsi1)
     
-    runagent -m jitsi1 podman exec -ti jitsi-web bash -c "cp config.js custom-config.js && cp interface_config.js custom-interface_config.js && exit"
+    runagent -m jitsi6 podman exec -ti -w /config jitsi-web bash -c "cp config.js custom-config.js && cp interface_config.js custom-interface_config.js && exit"
 
 The custom files config is appended to the default configuration files. It's also possible to just append what you like to change instead of copying the original files.
 
