@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman jitsi.service
-Requires=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.service
-Before=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.service
+Requires=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.service jitsi-etherpad.service jitsi-excalidraw.service jitsi-jibri.service
+Before=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.service jitsi-etherpad.service jitsi-excalidraw.service jitsi-jibri.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
@@ -28,6 +28,8 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/jitsi.pid \
     --add-host xmpp.meet.jitsi:127.0.0.1 \
     --add-host jvb.meet.jitsi:127.0.0.1 \
     --add-host meet.jitsi:127.0.0.1 \
+    --add-host whiteboard.meet.jitsi:127.0.0.1 \
+    --add-host etherpad.meet.jitsi:127.0.0.1 \
     --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/jitsi.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/jitsi.pod-id -t 10

@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=node:fwadm traefik@node:routeadm cluster:accountconsumer" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/jitsi/web:stable-10184 docker.io/jitsi/prosody:stable-10184 docker.io/jitsi/jicofo:stable-10184 docker.io/jitsi/jvb:stable-10184" \
+    --label="org.nethserver.images=docker.io/jitsi/web:stable-10431 docker.io/jitsi/prosody:stable-10431 docker.io/jitsi/jicofo:stable-10431 docker.io/jitsi/jvb:stable-10431 docker.io/jitsi/jibri:stable-10431 docker.io/etherpad/etherpad:2.3.2 docker.io/jitsi/excalidraw-backend:2025.2.2" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"

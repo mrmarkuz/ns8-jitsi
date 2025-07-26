@@ -1,0 +1,35 @@
+#
+# Copyright (C) 2025 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  jitsi-jibri.service
+BindsTo=jitsi.serviceprosody
+After=jitsi.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/rm -f %t/jitsi-jibri.pid %t/jitsi-jibri.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-jibri.pid \
+    --cidfile %t/jitsi-jibri.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-jibri \
+    --env-file %S/state/environment \
+    --env-file jitsi.env \
+    --volume jibri-config:/config:Z \
+    ${JIBRI_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-jibri.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP jitsi-jibri
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/jitsi-jibri.ctr-id
+PIDFile=%t/jitsi-jibri.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
