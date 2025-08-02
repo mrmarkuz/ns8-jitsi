@@ -30,10 +30,14 @@ config = {}
 
 # Read current configuration from the environment file
 config["host"] = os.getenv("TRAEFIK_HOST","")
+config["port"] = os.getenv("JVB_PORT","10000")
+config["jvbip"] = os.getenv("JVB_ADVERTISE_IPS","192.168.1.1")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 config["ldap_domain"] = os.getenv("LDAP_DOMAIN")
 config['domains_list'] = domains
+config["port"] = agent.read_envfile("jitsi.env")["JVB_PORT"] if os.path.exists("jitsi.env") else "10000"
+config["jvbip"] = agent.read_envfile("jitsi.env")["JVB_ADVERTISE_IPS"] if os.path.exists("jitsi.env") else "192.168.1.1"
 
 # Dump the configuration to stdout
 json.dump(config, fp=sys.stdout)

@@ -12,6 +12,15 @@ from agent.ldapproxy import Ldapproxy
 
 data = json.load(sys.stdin)
 host = data.get("host", '')
+
+port = data.get("port", '10000')
+jvbip = data.get("jvbip", '192.168.1.1')
+
+# Don't set env vars in environment for port and advertising IPs, they're set it in config.env
+#agent.set_env("JVB_PORT",data.get("port","10000"))
+#agent.set_env("JVB_ADVERTISE_IPS",data.get("jvbip","192.168.1.1"))
+
+# Set the authtype to internal by default
 authtype = "internal"
 
 # Get LDAP domain
@@ -22,7 +31,6 @@ ldap_domain = data.get("ldap_domain", "")
 agent.set_env("LDAP_DOMAIN",ldap_domain)
 
 # unset LDAP
-
 agent.unset_env("LDAP_URL")
 agent.unset_env("LDAP_BASE")
 agent.unset_env("LDAP_BINDDN")
@@ -66,7 +74,7 @@ else:
 
 # Setup environment for jitsi
 config = {
-#  "JVB_ADVERTISE_IPS": "192.168.3.141,10.0.2.2",
+  "JVB_ADVERTISE_IPS": jvbip,
   "JICOFO_COMPONENT_SECRET": "df4jdDf49d3!dfg356Df83&",
   "JICOFO_AUTH_PASSWORD": "df4jdDf49d3!dfg356Df83&",
   "JVB_AUTH_PASSWORD": "df4jdDf49d3!dfg356Df83&",
@@ -78,8 +86,10 @@ config = {
   "ENABLE_LETSENCRYPT": "0",
   "ETHERPAD_TITLE": "Video Chat",
   "ETHERPAD_DEFAULT_PAD_TEXT": "Welcome to Web Chat!\\n\\n",
+  "ETHERPAD_PUBLIC_URL": "https://etherpad."+host,
   "ETHERPAD_SKIN_NAME": "colibris",
   "ETHERPAD_SKIN_VARIANTS": "super-light-toolbar super-light-editor light-background full-width-editor",
+  "ETHERPAD_URL_BASE": "http://etherpad.meet.jitsi",
   "ENABLE_AUTH": "1",
   "ENABLE_GUESTS": "1",
   "AUTH_TYPE": authtype,
@@ -98,7 +108,7 @@ config = {
   "JVB_BREWERY_MUC": "jvbbrewery",
   "JVB_AUTH_USER": "jvb",
   "JVB_STUN_SERVERS": "meet-jit-si-turnrelay.jitsi.net:443",
-  "JVB_PORT": "9999",
+  "JVB_PORT": port,
   "JVB_TCP_HARVESTER_DISABLED": "true",
   "JVB_TCP_PORT": "4443",
   "JVB_TCP_MAPPED_PORT": "4443",

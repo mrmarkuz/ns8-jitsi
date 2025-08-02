@@ -88,6 +88,29 @@
               <cv-accordion-item :open="toggleAccordion[0]">
                 <template slot="title">{{ $t("settings.advanced") }}</template>
                 <template slot="content">
+
+                  <cv-text-input
+                    :label="$t('settings.jitsi_port')"
+                    placeholder="10000"
+                    v-model.trim="jvbip"
+                    class="mg-bottom"
+                    :invalid-message="$t(error.port)"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                    ref="port"
+                  >
+                  </cv-text-input>
+
+                  <cv-text-input
+                    :label="$t('settings.jitsi_jvbip')"
+                    placeholder="192.168.1.1"
+                    v-model.trim="jvbip"
+                    class="mg-bottom"
+                    :invalid-message="$t(error.jvbip)"
+                    :disabled="loading.getConfiguration || loading.configureModule"
+                    ref="jvbip"
+                  >
+                  </cv-text-input>
+
                 </template>
               </cv-accordion-item>
             </cv-accordion>
@@ -149,6 +172,8 @@ export default {
       isHttpToHttpsEnabled: true,
       ldap_domain: "",
       domains_list: [],
+      port: "",
+      jvbip: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -160,6 +185,8 @@ export default {
         lets_encrypt: "",
         http2https: "",
         ldap_domain: "",
+        port: "",
+        jvbip: "",
       },
     };
   },
@@ -228,6 +255,8 @@ export default {
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.domains_list = config.domains_list;
+      this.port = config.port;
+      this.jvbip = config.jvbip;
       // this.ldap_domain = config.ldap_domain;
       // force to reload value after dom update
       this.$nextTick(() => {
@@ -246,6 +275,22 @@ export default {
 
         if (isValidationOk) {
           this.focusElement("host");
+        }
+        isValidationOk = false;
+      }
+      if (!this.port) {
+        this.error.port = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("port");
+        }
+        isValidationOk = false;
+      }
+      if (!this.jvbip) {
+        this.error.jvbip = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("jvbip");
         }
         isValidationOk = false;
       }
@@ -300,6 +345,8 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
+            port: this.port,
+            jvbip: this.jvbip,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
             ldap_domain: this.ldap_domain,
