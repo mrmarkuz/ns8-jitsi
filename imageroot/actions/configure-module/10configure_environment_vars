@@ -24,7 +24,7 @@ jvbip = data.get("jvbip", '192.168.1.1')
 authtype = "internal"
 
 # Get LDAP domain
-ldap_domain = data.get("ldap_domain", "")
+ldap_domain = data.get("ldap_domain", '')
 
 # Set LDAP domain
 
@@ -44,7 +44,7 @@ agent.unset_env("LDAP_START_TLS")
 
 # Check if an LDAP domain is set:
 
-if ldap_domain != "":
+if ldap_domain != "" and ldap_domain != "None":
     agent.bind_user_domains([ldap_domain])
     authtype = "ldap"
 
@@ -85,11 +85,11 @@ config = {
   "PUBLIC_URL": "https://"+host,
   "ENABLE_LETSENCRYPT": "0",
   "ETHERPAD_TITLE": "Video Chat",
-  "ETHERPAD_DEFAULT_PAD_TEXT": "Welcome to Web Chat!\\n\\n",
-  "ETHERPAD_PUBLIC_URL": "https://etherpad."+host,
+  "ETHERPAD_DEFAULT_PAD_TEXT": "Web chat",
+  "ETHERPAD_PUBLIC_URL": "https://etherpad."+host+"/p/",
   "ETHERPAD_SKIN_NAME": "colibris",
   "ETHERPAD_SKIN_VARIANTS": "super-light-toolbar super-light-editor light-background full-width-editor",
-  "ETHERPAD_URL_BASE": "http://etherpad.meet.jitsi",
+  "ETHERPAD_URL_BASE": "http://etherpad.meet.jitsi:9001",
   "ENABLE_AUTH": "1",
   "ENABLE_GUESTS": "1",
   "AUTH_TYPE": authtype,

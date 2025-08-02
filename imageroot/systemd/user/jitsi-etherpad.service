@@ -1,3 +1,8 @@
+#
+# Copyright (C) 2025 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
 [Unit]
 Description=Podman  jitsi-etherpad.service
 BindsTo=jitsi.service
@@ -17,13 +22,10 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-etherpad.pid \
     --cidfile %t/jitsi-etherpad.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-etherpad \
     --env-file %S/state/environment \
-#    --env-file jitsi.env \
-#    --volume plugins:/opt/etherpad-lite/src/plugin_packages:Z \
-#    --volume etherpad-var:/opt/etherpad-lite/var:Z \
-    --env TITLE=${ETHERPAD_TITLE:-""} \
-    --env DEFAULT_PAD_TEXT=${ETHERPAD_DEFAULT_PAD_TEXT:-" "} \
-    --env SKIN_NAME=SKIN_NAME=${ETHERPAD_SKIN_NAME:-colibris} \
-    --env SKIN_VARIANTS=${ETHERPAD_SKIN_VARIANTS:-"super-light-toolbar super-light-editor light-background full-width-editor"} \
+    --env TITLE=${ETHERPAD_TITLE} \
+    --env DEFAULT_PAD_TEXT=${ETHERPAD_DEFAULT_PAD_TEXT} \
+    --env SKIN_NAME=SKIN_NAME=${ETHERPAD_SKIN_NAME} \
+    --env SKIN_VARIANTS=${ETHERPAD_SKIN_VARIANTS} \
     --env SUPPRESS_ERRORS_IN_PAD_TEXT=true \
     ${ETHERPAD_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-etherpad.ctr-id -t 10
