@@ -92,7 +92,7 @@
                   <cv-text-input
                     :label="$t('settings.jitsi_port')"
                     placeholder="10000"
-                    v-model.trim="jvbip"
+                    v-model.trim="port"
                     class="mg-bottom"
                     :invalid-message="$t(error.port)"
                     :disabled="loading.getConfiguration || loading.configureModule"
