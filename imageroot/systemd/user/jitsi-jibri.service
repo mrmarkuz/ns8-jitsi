@@ -5,7 +5,7 @@
 
 [Unit]
 Description=Podman  jitsi-jibri.service
-BindsTo=jitsi.serviceprosody
+BindsTo=jitsi.service
 After=jitsi.service
 
 [Service]
@@ -20,9 +20,11 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-jibri.pid \
     --cidfile %t/jitsi-jibri.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-jibri \
+    --cap-add SYS_ADMIN \
     --env-file %S/state/environment \
     --env-file jitsi.env \
     --volume jibri-config:/config:Z \
+    --env DISPLAY=:0 \
     ${JIBRI_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/jitsi-jibri.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP jitsi-jibri
