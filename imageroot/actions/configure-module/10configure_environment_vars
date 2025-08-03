@@ -44,7 +44,7 @@ agent.unset_env("LDAP_START_TLS")
 
 # Check if an LDAP domain is set:
 
-if ldap_domain != "" and ldap_domain != "None":
+if ldap_domain != "" and ldap_domain != "None" and ldap_domain != None:
     agent.bind_user_domains([ldap_domain])
     authtype = "ldap"
 
