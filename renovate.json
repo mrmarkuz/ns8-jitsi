@@ -14,10 +14,10 @@
         "/build-images.sh/"
       ],
       "matchStrings": [
-        "docker\\.io/jitsi/jitsi-web:(?<currentValue>[-0-9\\.a-z]+)"
+        "docker\\.io/jitsi/web:(?<currentValue>[-0-9\\.a-z]+)"
       ],
       "datasourceTemplate": "docker",
-      "depNameTemplate": "jitsi/jitsi-web"
+      "depNameTemplate": "jitsi/web"
     }
   ]
 }
