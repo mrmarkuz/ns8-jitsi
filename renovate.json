@@ -1,18 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "ignorePaths": ["**/ui/**", "**/.devcontainer/**"],
+  "extends": [
+    "config:recommended"
+  ],
+  "ignorePaths": [
+    "**/ui/**",
+    "**/.devcontainer/**"
+  ],
   "customManagers": [
     {
       "customType": "regex",
       "managerFilePatterns": [
         "/build-images.sh/"
       ],
-      "matchStrings": [        
+      "matchStrings": [
         "docker\\.io/jitsi/jitsi-web:(?<currentValue>[-0-9\\.a-z]+)"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "jitsi/jitsi-web"
     }
-  ]  
+  ]
 }
