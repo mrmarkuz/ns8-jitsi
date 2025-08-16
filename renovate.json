@@ -13,11 +13,11 @@
       "managerFilePatterns": [
         "/build-images.sh/"
       ],
-      "matchStrings": [
-        "docker\\.io/jitsi/web:(?<currentValue>[-0-9\\.a-z]+)"
+      "matchStrings": [        
+        "docker\\.io/jitsi/jitsi-web:(?<currentValue>[-0-9\\.a-z]+)"
       ],
       "datasourceTemplate": "docker",
-      "depNameTemplate": "jitsi"
+      "depNameTemplate": "jitsi/jitsi-web"
     }
   ]  
 }
