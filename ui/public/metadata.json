@@ -16,5 +16,5 @@
     "bug_url": "https://github.com/mrmarkuz/ns8-jitsi",
     "code_url": "https://github.com/mrmarkuz/ns8-jitsi"
   },
-  "source": "ghcr.io/nethserver/jitsi"
+  "source": "ghcr.io/mrmarkuz/jitsi"
 }
