@@ -41,7 +41,9 @@
     "host_pattern": "Must be a valid fully qualified domain name",
     "host_format": "Must be a valid fully qualified domain name",
     "choose_the_ldap_domain_to_use": "Choose the optional LDAP domain to use for Jitsi",
-    "choose_ldap_domain": "Choose LDAP/AD Domain or leave empty"
+    "choose_ldap_domain": "Choose LDAP/AD Domain or leave empty",
+    "jitsi_port": "Jitsi Default Media UDP Port",
+    "jitsi_jvbip": "IP addresses of the Docker host"
   },
   "about": {
     "title": "About"

@@ -44,7 +44,7 @@ agent.set_route(set_route_data)
 set_route_data = {
     'instance': os.environ['MODULE_ID']+"-etherpad",
     'url':  'http://127.0.0.1:' + etherpad_tcp_port,
-    'host': host,
+    'host': "etherpad."+host,
     'http2https': h2hs,
     'lets_encrypt_check': True,
     'lets_encrypt_cleanup': True,
