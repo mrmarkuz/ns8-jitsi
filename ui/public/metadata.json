@@ -1,8 +1,11 @@
 {
   "name": "Jitsi",
   "description": {
-    "en": "Open source video conferencing webapp",
-    "de": "Open Source Videokonferenz Webapplikation"
+    "en": "Jitsi is a collection of free and open-source multiplatform voice, video conferencing, and instant messaging applications",
+    "de": "Jitsi ist eine Sammlung kostenloser Open-Source-Anwendungen für Sprach- und Videokonferenzen sowie Instant Messaging, die auf verschiedenen Plattformen einsetzbar sind",
+    "fr": "Jitsi est un ensemble d’applications multiplateformes, libres et open source, dédiées à la voix, à la visioconférence et à la messagerie instantanée",
+    "it": "Jitsi è una raccolta di applicazioni multipiattaforma, gratuite e open source, per la comunicazione vocale, le videoconferenze e la messaggistica istantanea",
+    "es": "Jitsi es un conjunto de aplicaciones multiplataforma, gratuitas y de código abierto, para voz, videoconferencias y mensajería instantánea"
   },
   "categories": ["collaboration"],
   "authors": [
