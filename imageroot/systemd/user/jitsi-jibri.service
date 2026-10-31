@@ -10,9 +10,9 @@ After=jitsi.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=%S/state/environment
-EnvironmentFile=-%S/state/smarthost.env
-WorkingDirectory=%S/state
+EnvironmentFile=%E/state/environment
+EnvironmentFile=-%E/state/smarthost.env
+WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/jitsi-jibri.pid %t/jitsi-jibri.ctr-id
@@ -21,7 +21,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-jibri.pid \
     --cidfile %t/jitsi-jibri.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-jibri \
     --cap-add SYS_ADMIN \
-    --env-file %S/state/environment \
+    --env-file %E/state/environment \
     --env-file jitsi.env \
     --volume jibri-config:/config:Z \
     --env DISPLAY=:0 \

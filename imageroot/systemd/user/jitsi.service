@@ -10,8 +10,8 @@ Before=jitsi-web.service jitsi-prosody.service jitsi-jicofo.service jitsi-jvb.se
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=-%S/state/environment
-EnvironmentFile=-%S/state/jitsi.env
+EnvironmentFile=-%E/state/environment
+EnvironmentFile=-%E/state/jitsi.env
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/jitsi.pid %t/jitsi.pod-id

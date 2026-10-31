@@ -10,10 +10,10 @@ After=jitsi.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
-EnvironmentFile=%S/state/environment
-EnvironmentFile=%S/state/jitsi.env
-EnvironmentFile=-%S/state/smarthost.env
-WorkingDirectory=%S/state
+EnvironmentFile=%E/state/environment
+EnvironmentFile=%E/state/jitsi.env
+EnvironmentFile=-%E/state/smarthost.env
+WorkingDirectory=%E/state
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/jitsi-etherpad.pid %t/jitsi-etherpad.ctr-id
@@ -21,7 +21,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-etherpad.pid \
     --cidfile %t/jitsi-etherpad.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-etherpad \
-    --env-file %S/state/environment \
+    --env-file %E/state/environment \
     --env TITLE=${ETHERPAD_TITLE} \
     --env DEFAULT_PAD_TEXT=${ETHERPAD_DEFAULT_PAD_TEXT} \
     --env SKIN_NAME=SKIN_NAME=${ETHERPAD_SKIN_NAME} \
