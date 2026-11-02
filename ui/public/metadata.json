@@ -7,7 +7,7 @@
     "it": "Jitsi è una raccolta di applicazioni multipiattaforma, gratuite e open source, per la comunicazione vocale, le videoconferenze e la messaggistica istantanea",
     "es": "Jitsi es un conjunto de aplicaciones multiplataforma, gratuitas y de código abierto, para voz, videoconferencias y mensajería instantánea"
   },
-  "categories": ["collaboration"],
+  "categories": ["communication"],
   "authors": [
     {
       "name": "Markus Neuberger",
