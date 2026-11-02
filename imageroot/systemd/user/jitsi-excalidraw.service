@@ -5,7 +5,7 @@
 
 [Unit]
 Description=Podman  jitsi-excalidraw.service
-BindsTo=jitsi.serviceprosody
+BindsTo=jitsi.service
 After=jitsi.service
 
 [Service]
