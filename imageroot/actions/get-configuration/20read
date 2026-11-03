@@ -36,6 +36,7 @@ config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = agent.get_route(os.environ['MODULE_ID']).get('lets_encrypt', False)
 config["ldap_domain"] = os.getenv("LDAP_DOMAIN")
 config['domains_list'] = domains
+config["guests"] = agent.read_envfile("jitsi.env")["ENABLE_GUESTS"] if os.path.exists("jitsi.env") else "0"
 config["port"] = agent.read_envfile("jitsi.env")["JVB_PORT"] if os.path.exists("jitsi.env") else "10000"
 config["jvbip"] = agent.read_envfile("jitsi.env")["JVB_ADVERTISE_IPS"] if os.path.exists("jitsi.env") else "192.168.1.1"
 
