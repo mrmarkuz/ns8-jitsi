@@ -44,7 +44,7 @@
     "choose_ldap_domain": "Choose LDAP/AD Domain or leave empty",
     "jitsi_port": "Jitsi Default Media UDP Port",
     "jitsi_jvbip": "IP addresses of the Docker host",
-    "enable_guests": "Enable guest access"
+    "enable_guests": "Guest Access"
   },
   "about": {
     "title": "About"
