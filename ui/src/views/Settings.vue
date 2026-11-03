@@ -255,6 +255,7 @@ export default {
       isHttpToHttpsEnabled: true,
       ldap_domain: "",
       domains_list: [],
+      guests: false,
       port: "",
       jvbip: "",
       loading: {
@@ -269,6 +270,7 @@ export default {
         lets_encrypt: "",
         http2https: "",
         ldap_domain: "",
+        guests: "",
         port: "",
         jvbip: "",
         getStatus: false,
@@ -394,6 +396,7 @@ export default {
       this.isLetsEncryptCurrentlyEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.domains_list = config.domains_list;
+      this.enableGuests = config.guests;
       this.port = config.port;
       this.jvbip = config.jvbip;
       // this.ldap_domain = config.ldap_domain;
@@ -490,6 +493,7 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
+            guests: this.enableGuests,
             port: this.port,
             jvbip: this.jvbip,
             lets_encrypt: this.isLetsEncryptEnabled,
