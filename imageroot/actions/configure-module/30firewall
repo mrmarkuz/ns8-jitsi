@@ -8,14 +8,8 @@
 import agent
 import os
 
-if not os.path.isfile("secret.env"):
-    password = agent.read_envfile("jitsi.env")["JIBRI_RECORDER_PASSWORD"] if os.path.exists("jitsi.env") else "10000"    
-    config = {
-      "JICOFO_COMPONENT_SECRET": password,
-      "JICOFO_AUTH_PASSWORD": password,
-      "JVB_AUTH_PASSWORD": password,
-      "JIGASI_XMPP_PASSWORD": password,
-      "JIBRI_RECORDER_PASSWORD": password,
-      "JIBRI_XMPP_PASSWORD": password,
-    }
-    agent.write_envfile('secrets.env', config)
+port = agent.read_envfile("jitsi.env")["JVB_PORT"] if os.path.exists("jitsi.env") else "10000"
+
+agent.add_public_service(os.environ['MODULE_ID'], [
+    port + "/udp", # RTP over UDP
+], replace_ports=True)

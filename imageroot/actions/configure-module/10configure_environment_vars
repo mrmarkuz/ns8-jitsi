@@ -6,6 +6,7 @@
 #
 
 import json
+import os
 import sys
 import string
 import secrets
@@ -82,8 +83,8 @@ if ldap_domain != "" and ldap_domain != "None" and ldap_domain != None:
 else:
     agent.bind_user_domains([])
 
-# Generate random password if secret.env doesn't exist
-if not os.path.isfile("secret.env"):
+# Generate random password if secrets.env doesn't exist
+if not os.path.isfile("secrets.env"):
     alphabet = string.ascii_letters + string.digits
     password = ''.join([secrets.choice(alphabet) for i in range(32)])
     config = {
