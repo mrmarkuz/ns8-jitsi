@@ -117,7 +117,7 @@
             </NsComboBox>
 
             <cv-toggle
-              value="enableGuests"
+              value="guests"
               :label="$t('settings.enable_guests')"
               v-model="guests"
               :disabled="loading.getConfiguration || loading.configureModule"
@@ -396,7 +396,7 @@ export default {
       this.isLetsEncryptCurrentlyEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.domains_list = config.domains_list;
-      this.enableGuests = config.guests;
+      this.guests = config.guests;
       this.port = config.port;
       this.jvbip = config.jvbip;
       // this.ldap_domain = config.ldap_domain;
@@ -493,7 +493,7 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
-            guests: this.enableGuests,
+            guests: this.guests,
             port: this.port,
             jvbip: this.jvbip,
             lets_encrypt: this.isLetsEncryptEnabled,
