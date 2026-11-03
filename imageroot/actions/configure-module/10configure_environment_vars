@@ -82,9 +82,19 @@ if ldap_domain != "" and ldap_domain != "None" and ldap_domain != None:
 else:
     agent.bind_user_domains([])
 
-# Generate random password
-alphabet = string.ascii_letters + string.digits + '+-/,.-_^'
-password = ''.join([secrets.choice(alphabet) for i in range(32)])
+# Generate random password if secret.env doesn't exist
+if not os.path.isfile("secret.env"):
+    alphabet = string.ascii_letters + string.digits
+    password = ''.join([secrets.choice(alphabet) for i in range(32)])
+    config = {
+      "JICOFO_COMPONENT_SECRET": password,
+      "JICOFO_AUTH_PASSWORD": password,
+      "JVB_AUTH_PASSWORD": password,
+      "JIGASI_XMPP_PASSWORD": password,
+      "JIBRI_RECORDER_PASSWORD": password,
+      "JIBRI_XMPP_PASSWORD": password,
+    }
+    agent.write_envfile('secrets.env', config)
 
 # Set guests var
 if guests == True:
@@ -95,12 +105,6 @@ else:
 # Setup environment for jitsi
 config = {
   "JVB_ADVERTISE_IPS": jvbip,
-  "JICOFO_COMPONENT_SECRET": password,
-  "JICOFO_AUTH_PASSWORD": password,
-  "JVB_AUTH_PASSWORD": password,
-  "JIGASI_XMPP_PASSWORD": password,
-  "JIBRI_RECORDER_PASSWORD": password,
-  "JIBRI_XMPP_PASSWORD": password,
   "TZ": "UTC",
   "PUBLIC_URL": "https://"+host,
   "ENABLE_LETSENCRYPT": "0",

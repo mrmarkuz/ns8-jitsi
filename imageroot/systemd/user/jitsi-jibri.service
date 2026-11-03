@@ -23,6 +23,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-jibri.pid \
     --cap-add SYS_ADMIN \
     --env-file %E/state/environment \
     --env-file jitsi.env \
+    --env-file secrets.env \
     --volume jibri-config:/config:Z \
     --env DISPLAY=:0 \
     ${JIBRI_IMAGE}

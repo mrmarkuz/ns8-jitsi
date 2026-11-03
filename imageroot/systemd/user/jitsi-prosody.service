@@ -22,6 +22,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/jitsi-prosody.pid \
     --pod-id-file %t/jitsi.pod-id --replace -d --name  jitsi-prosody \
     --env-file %E/state/environment \
     --env-file jitsi.env \
+    --env-file secrets.env \
     --volume jitsi-prosody-config:/config:Z \
     --volume jitsi-prosody-plugins-custom:/prosody-plugins-custom:Z \
     ${PROSODY_IMAGE}
