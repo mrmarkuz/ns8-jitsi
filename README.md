@@ -32,6 +32,17 @@ Following command can be used to create an internal user:
 
 For more information about internal auth, see [Jitsi Docker installation documentation](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker/#internal-authentication)
 
+## Rotate passwords
+
+Following procedure sets new passwords for the Jitsi components of app instance jitsi1:
+
+    runagent -m jitsi1
+    systemctl --user stop jitsi
+    podman volume rm -a
+    rm -f secrets.env
+
+Then go to app settings in cluster admin and save the configuration to recreate the secrets.env and start Jitsi again.
+
 ## Customization
 
 To customize Jitsi, custom files need to be created out of the default config: (in this example the Jitsi app instance is jitsi1)
