@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2023 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e
+
+# Redirect any output to the journal (stderr)
+exec 1>&2
+
+grep -q JVB_ADVERTISE_IPS jitsi.env || echo "JVB_ADVERTISE_IPS=192.168.1.1" >> jitsi.env

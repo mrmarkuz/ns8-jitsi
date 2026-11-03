@@ -12,4 +12,11 @@ set -e
 # Redirect any output to the journal (stderr)
 exec 1>&2
 
-systemctl --user try-restart jitsi.service
+# After the update from stable-10184 the password were rotated so the volumes need to be removed
+if [[ "${PREV_JVB_IMAGE}" == "docker.io/jitsi/jvb:stable-10184" ]]; then
+  systemctl --user stop jitsi.service
+  podman volume rm -a -f
+  systemctl --user start jitsi.service
+else
+  systemctl --user try-restart jitsi.service
+fi
