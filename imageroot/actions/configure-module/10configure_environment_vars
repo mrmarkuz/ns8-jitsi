@@ -86,7 +86,8 @@ else:
 alphabet = string.ascii_letters + string.digits + '+-/,.-_^'
 password = ''.join([secrets.choice(alphabet) for i in range(32)])
 
-if guests == "True":
+# Set guests var
+if guests == True:
     enableguests = "1"
 else:
     enableguests = "0"
