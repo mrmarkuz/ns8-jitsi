@@ -6,7 +6,7 @@
     "packageRules": [
         {
             "matchDatasources": ["github-releases"],
-            "matchPackageNames": ["jitsi/docker-jitsi-meet"],
+            "matchPackageNames": ["jitsi"],
             "versioning": "regex:^stable-(?<major>\\d+)(?:-(?<minor>\\d+))?$"
         }
     ]
