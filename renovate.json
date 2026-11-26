@@ -5,7 +5,6 @@
     ],
     "packageRules": [
         {
-            "matchDatasources": ["github-releases"],
             "matchPackageNames": ["ghcr.io/jitsi/*"],
             "versioning": "regex:^stable-(?<major>\\d+)(?:-(?<minor>\\d+))?$"
         }
