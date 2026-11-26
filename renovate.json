@@ -6,7 +6,8 @@
     "packageRules": [
         {
             "matchPackageNames": ["ghcr.io/jitsi/*"],
-            "versioning": "regex:^stable-(?<major>\\d+)(?:-(?<minor>\\d+))?$"
+            "versioning": "regex:^stable-(?<major>\\d+)(?:-(?<minor>\\d+))?$",
+			"groupName": "Jitsi"
         }
     ]
 }
