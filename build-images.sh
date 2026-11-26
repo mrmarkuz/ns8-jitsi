@@ -43,7 +43,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.rootfull=0" \
 	--label="org.nethserver.min-core=3.20.1" \
-    --label="org.nethserver.images=ghcr.io/jitsi/web:stable-11248-2 ghcr.io/jitsi/prosody:stable-11248-2 ghcr.io/jitsi/jicofo:stable-11248-2 ghcr.io/jitsi/jvb:stable-11248-2 ghcr.io/jitsi/jibri:stable-11248-2" \
+    --label="org.nethserver.images=ghcr.io/jitsi/web:stable-11248-2 ghcr.io/jitsi/prosody:stable-11248-2 ghcr.io/jitsi/jicofo:stable-11509-1 ghcr.io/jitsi/jvb:stable-11248-2 ghcr.io/jitsi/jibri:stable-11248-2" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
